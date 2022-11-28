@@ -1,5 +1,5 @@
 import './App.css';
-// import Login from "./pages/login";
+import Login from "./pages/login";
 import Register from "./pages/register";
 // import Login from "./pages/login";
 
@@ -12,8 +12,7 @@ function App() {
     <div className="App">
       <Routes>
       <Route path="/" element={ <Register />}/>
-      {/* <Route path="/login" element={ <Login />}/> */}
-      {/* <Route path="./login" element={ <Login />}/> */}
+      <Route path="/login" element={ <Login />}/>
       </Routes>
     </div>
   );

@@ -29,4 +29,31 @@ async function addUser(req, res) {
     }
 }
 
-export default { addUser };
+async function loginUser(obj) {
+
+    //time to check if the user even exists 
+    const user = await getUsername(obj.name);
+
+    if (!user) {
+        console.log('login has failed')
+        return {error: 'Username or password is wrong'}
+    }
+
+    //compare hashed obj.password , hashed password in database
+    const mathPassword = bcrypt.compareSync(obj.password, user.password);
+
+    if (!mathPassword) {
+        console.log('Password failed');
+        return {error: 'Username or password is wrong'}
+    } else {
+        console.log('Success login');
+        return {result: 'success', message: 'Password is matching', user: user}
+    }
+}
+
+
+async function getUsername(username) {
+    return await UserModel.findOne({"name": username});
+}
+
+export default { addUser, loginUser, getUsername };
